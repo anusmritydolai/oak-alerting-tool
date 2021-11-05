@@ -1,0 +1,11 @@
+<div class="login-container">
+    <img class="oak-logo" src=""/>
+
+    <form [formGroup]="form" class="login-form">
+        <input type="text" placeholder="Username" formControlName="email"/>
+        <input type="password" placeholder="Password" formControlName="password"/>
+        <button class="btn-login" type="submit" (click)="login()">Login</button>
+    </form>
+    
+    <a href="#" class="link-secondary">Forgot Password</a>
+</div>
