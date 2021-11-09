@@ -1,1 +1,93 @@
-<app-graphs [data]="hourlyCostData"></app-graphs>
+<!-- <app-chart [data]="hourlyCostData"></app-chart> -->
+<app-header></app-header>
+<div class="dash">
+  <div class="card card-custom">
+    <div class="card-heading">Summary</div>
+    <span class="widget-subtitle"
+      >Summary of all the alerts that has been generated in the system</span
+    >
+    <div class="spa">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Main 1</th>
+            <th scope="col">Main 1 L1</th>
+            <th scope="col">Main 1 L2</th>
+            <th scope="col">Main 1 L3</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Voltage Imbalance</th>
+            <td class="bcolor1">12</td>
+            <td>4</td>
+            <td>2</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <th scope="row">Load Imbalance</th>
+            <td>0</td>
+            <td class="bcolor2">8</td>
+            <td class="bcolor1">11</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <th scope="row">Low Power Factor</th>
+            <td>2</td>
+            <td>0</td>
+            <td class="bcolor2">8</td>
+            <td class="bcolor1">12</td>
+          </tr>
+          <tr>
+            <th scope="row">Abnormal Change In Energy Cons</th>
+            <td>0</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+          </tr>
+        </tbody>
+      </table>
+      <div>
+        <div class="card-heading">Generate Analysis Report</div>
+        <div class="gap">
+          <span class="card-heading1">
+            Parameter:
+          </span>
+          <select class="form-select monthPicker" [(ngModel)]="selectedType">
+            <option *ngFor="let type of typeList" [value]="type">
+              {{ type }}
+            </option>
+          </select>
+        </div>
+        <div class="gap">
+          <span class="card-heading1">
+            Phase:
+          </span>
+          <select class="form-select monthPicker" [(ngModel)]="selectedType">
+            <option *ngFor="let type of typeList" [value]="type">
+              {{ type }}
+            </option>
+          </select>
+        </div>
+        <div class="gap">
+          <span class="card-heading1">
+            Date Range:
+          </span>
+          <select class="form-select monthPicker" [(ngModel)]="selectedType">
+            <option *ngFor="let type of typeList" [value]="type">
+              {{ type }}
+            </option>
+          </select>
+        </div>
+        <div class="gap">
+          <button class="btn-login" (click)="show = !show" id="bt">Generate</button>
+        </div>
+
+      </div>
+    </div>
+    <ng-container *ngIf="show">
+      <app-graphs [data]="hourlyCostData"></app-graphs>
+    </ng-container>
+  </div>
+</div>

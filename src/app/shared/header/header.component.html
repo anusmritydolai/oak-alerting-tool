@@ -1,0 +1,26 @@
+<img class="header-img" src="/assets/OakInsightsLogo.svg" />
+<div class="icon-list">
+  <div class="btn-group" dropdown #dropdown="bs-dropdown">
+    <ngs-avater
+      class="pointer1"
+      size="48px"
+      isFixedColor="#FFFFFF"
+      imageSize="48px"
+      (click)="dropdown.toggle(true)"
+    ></ngs-avater>
+    <ul
+      id="dropdown-triggers-manual"
+      *dropdownMenu
+      class="dropdown-menu pointer"
+      role="menu"
+      aria-labelledby="button-triggers-manual"
+    >
+      <!-- <li role="menuitem">
+        <a class="dropdown-item" routerLink="/myprofile">My Profile</a>
+      </li> -->
+      <li role="menuitem">
+        <a class="dropdown-item" (click)="logout()">Logout</a>
+      </li>
+    </ul>
+  </div>
+</div>

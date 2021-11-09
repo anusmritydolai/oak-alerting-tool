@@ -1,4 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
+html, body { height: 100%; }
+body { margin: 0; font-family: 'Avenir-Roman'!important }
+
+@font-face {
+  font-family: Gilroy-Bold;
+  src: url(assets/Font/Avenir/gilroy-extrabold-webfont.woff2) format("woff2");
+}
+
+@font-face {
+  font-family: Avenir-Roman;
+  src: url(assets/Font/Avenir/Avenir-Roman.woff2) format("woff2");
+}
+
+@font-face {
+  font-family: Gilroy-Light;
+  src: url(assets/Font/Avenir/gilroy-light-webfont.woff2) format("woff2");
+}
+
 :root {--color1: #465da4;
     --color2: #F3837A;
     --color3: #364096;
@@ -22,3 +40,13 @@
     --fontLight: 'Gilroy-Light';
     
     }
+    .background-theme {
+      background-color: #e5f2fb;
+}
+
+
+/* Importing Bootstrap SCSS file. */
+@import "~bootstrap/scss/bootstrap";
+
+/* Importing Datepicker SCSS file. */
+@import "~ngx-bootstrap/datepicker/bs-datepicker";
