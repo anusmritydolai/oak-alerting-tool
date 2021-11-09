@@ -1,17 +1,23 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Chart } from 'angular-highcharts';
 
 @Component({
-  selector: 'app-graphs',
-  templateUrl: './graphs.component.html',
-  styleUrls: ['./graphs.component.scss']
+  selector: 'app-data',
+  templateUrl: './data.component.html',
+  styleUrls: ['./data.component.scss']
 })
-export class GraphsComponent implements OnInit {
-  @Input('data') data: any;
-  chart: any = {};
-  constructor() { }
-
+export class DataComponent implements OnInit {
+  [x: string]: any;
+  data: any;
+  chart: any;
+  constructor(private route: ActivatedRoute) {
+  }
+  
   ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      if (params.data) this.data = JSON.parse(params.data);
+    });
     this.chart = new Chart({
       title: {
         text: '',
@@ -58,21 +64,10 @@ export class GraphsComponent implements OnInit {
           name: 'Cost (£)',
           type: 'area',
           pointInterval: 10,
-          data: [49.9, 106.4, 60.2, 104.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4],
+          data: this.data.data,
         },
       ],
     });
   }
 
-  onClick() {
-    const data = {
-      // name: "test",
-      // email: "test@example.com"
-      data: [49.9, 106.4, 60.2, 104.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4],
-
-    }
-    const url = location.origin + "/data?data=" + JSON.stringify(data);
-    console.log(url);
-    window.open(url, "_blank");
-  }
 }
