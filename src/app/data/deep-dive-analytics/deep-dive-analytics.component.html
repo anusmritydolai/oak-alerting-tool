@@ -1,0 +1,26 @@
+<app-header></app-header>
+<div class="dash">
+  <div class="card card-custom">
+    <div class="card-heading">
+      Deep Analysis: {{ start_date | date: 'dd-MM-YY' }} to
+      {{ end_date | date: 'dd-MM-YY' }}
+    </div>
+    <div class="card card-custom">
+      <div class="card-heading">
+    Tabular Format
+    </div>
+    </div>
+    <div class="card card-custom">
+      <div class="card-heading">
+        Anayltical Plots for {{ phase }} (kWh)
+        <div [chart]="chart"></div>
+      </div>
+    </div>
+    <div class="card card-custom">
+      <div class="card-heading">
+        {{ type }}
+      </div>
+    </div>
+  </div>
+</div>
+

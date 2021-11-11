@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DataComponent } from './data.component';
+import { DeepDiveAnalyticsComponent } from './deep-dive-analytics/deep-dive-analytics.component';
 
 const routes: Routes = [
-  { path: '', component: DataComponent}
+  { path: '', component: DeepDiveAnalyticsComponent}
+  
 ];
 
 @NgModule({

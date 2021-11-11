@@ -1,24 +1,29 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Chart } from 'angular-highcharts';
 
 @Component({
-  selector: 'app-data',
-  templateUrl: './data.component.html',
-  styleUrls: ['./data.component.scss']
+  selector: 'app-deep-dive-analytics',
+  templateUrl: './deep-dive-analytics.component.html',
+  styleUrls: ['./deep-dive-analytics.component.scss']
 })
-export class DataComponent implements OnInit {
-  [x: string]: any;
-  data: any;
+export class DeepDiveAnalyticsComponent implements OnInit {
   chart: any;
+  pipe = new DatePipe('en-GB');
+  start_date: Date = new Date();
+  end_date: Date = new Date();
+  type: string = '';
+  phase: string = '';
   constructor(private route: ActivatedRoute) {
   }
   
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      if (params.data) this.data = JSON.parse(params.data);
-      console.log(params.data.dateRange);
-      
+      this.start_date = new Date(params.start_date);
+      this.end_date = new Date(params.end_date);
+      this.type = params.type;
+      this.phase = params.phase;      
     });
     this.chart = new Chart({
       title: {
@@ -66,7 +71,7 @@ export class DataComponent implements OnInit {
           name: 'Cost (£)',
           type: 'area',
           pointInterval: 10,
-          data: this.data.data,
+         data: [49.9, 106.4, 60.2, 104.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4],
         },
       ],
     });

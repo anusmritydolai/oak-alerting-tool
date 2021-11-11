@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { UserRoutingModule } from './user-routing.module';
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TestComponent } from './test/test.component';
 import { SharedModule } from '../shared/shared.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BsDatepickerModule, BsDaterangepickerDirective, DatepickerModule } from 'ngx-bootstrap/datepicker';
@@ -14,7 +13,6 @@ import { BsDatepickerModule, BsDaterangepickerDirective, DatepickerModule } from
 @NgModule({
   declarations: [
     LoginComponent,
-    TestComponent
   ],
   imports: [
     CommonModule,

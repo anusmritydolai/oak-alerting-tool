@@ -35,13 +35,12 @@ export function highchartsModules() {
 @NgModule({
   declarations: [
     GraphsComponent,
-    HeaderComponent
+    HeaderComponent,
   ],
   imports: [
     CommonModule,
     ChartModule,
     BsDatepickerModule,
-    // DatepickerModule,
     BsDropdownModule.forRoot(),
     NgsAvaterModule,
   ],

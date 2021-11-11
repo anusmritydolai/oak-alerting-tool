@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DataComponent } from './data.component';
+import { AlertingToolComponent } from './alerting-tool.component';
 
-describe('DataComponent', () => {
-  let component: DataComponent;
-  let fixture: ComponentFixture<DataComponent>;
+describe('AlertingToolComponent', () => {
+  let component: AlertingToolComponent;
+  let fixture: ComponentFixture<AlertingToolComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DataComponent ]
+      declarations: [ AlertingToolComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DataComponent);
+    fixture = TestBed.createComponent(AlertingToolComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -3,11 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: 'app-test',
-  templateUrl: './test.component.html',
-  styleUrls: ['./test.component.scss'],
+  selector: 'app-alerting-tool',
+  templateUrl: './alerting-tool.component.html',
+  styleUrls: ['./alerting-tool.component.scss']
 })
-export class TestComponent implements OnInit {
+export class AlertingToolComponent implements OnInit {
   hourlyCostData: any;
   show: boolean = false;
   pipe = new DatePipe('en-GB');
@@ -48,15 +48,15 @@ export class TestComponent implements OnInit {
     //   year: this.pipe.transform(this.selectedDate, 'YYYY')
     // };
   }
-
-  onClick() {
+  // {{path}}/deepDiveAnalytics?type=Abnormal&phase=Main1&start_date=2021-06-01&end_date=2021-11-10
+  onClick() {  
     const data = {
-      // name: "test",
-      // email: "test@example.com"
-      data: [49.9, 106.4, 60.2, 104.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4],
+      selectedType: this.selectedType,
+      selectedTypes: this.selectedTypes,
       dateRange: this.selectedDate
     }
-    const url = location.origin + "/data?data=" + JSON.stringify(data);
+    const url = location.origin + "/deepDiveAnalytics?type=" + this.selectedType + "&phase=" + this.selectedTypes +
+      "&start_date=" + this.pipe.transform(this.selectedDate[0], 'YYYY-MM-dd') + "&end_date=" + this.pipe.transform(this.selectedDate[1], 'YYYY-MM-dd');
     console.log(url);
     window.open(url, "_blank");
   }
