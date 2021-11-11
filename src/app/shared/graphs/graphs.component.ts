@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Chart } from 'angular-highcharts';
 
 @Component({
@@ -8,6 +8,7 @@ import { Chart } from 'angular-highcharts';
 })
 export class GraphsComponent implements OnInit {
   @Input('data') data: any;
+  @Output('goto') goto = new EventEmitter();
   chart: any = {};
   constructor() { }
 
@@ -65,14 +66,15 @@ export class GraphsComponent implements OnInit {
   }
 
   onClick() {
-    const data = {
-      // name: "test",
-      // email: "test@example.com"
-      data: [49.9, 106.4, 60.2, 104.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4],
+    this.goto.emit();
+    // const data = {
+    //   // name: "test",
+    //   // email: "test@example.com"
+    //   data: [49.9, 106.4, 60.2, 104.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4],
 
-    }
-    const url = location.origin + "/data?data=" + JSON.stringify(data);
-    console.log(url);
-    window.open(url, "_blank");
+    // }
+    // const url = location.origin + "/data?data=" + JSON.stringify(data);
+    // console.log(url);
+    // window.open(url, "_blank");
   }
 }

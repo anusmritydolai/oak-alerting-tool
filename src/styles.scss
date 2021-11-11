@@ -44,7 +44,24 @@ body { margin: 0; font-family: 'Avenir-Roman'!important }
       background-color: #e5f2fb;
 }
 
+.bs-datepicker-body table td.week span 
+{
+  color: var(--color3) !important; 
+}
 
+.bs-datepicker-body table td span.selected,
+.bs-datepicker-head,
+.bs-datepicker-head, .bs-datepicker button:active,
+.bs-datepicker-body table td.selected span,
+.bs-datepicker-body table td span[class*="select-"]:after,
+.bs-datepicker-body table td[class*="select-"] span:after,
+.bs-datepicker-body table td.active-week span:hover 
+{
+  background-color: var(--color3)!important; 
+}
+.bs-datepicker {
+  transform: translateX(-123px) translateY(100px) !important;
+}
 /* Importing Bootstrap SCSS file. */
 @import "~bootstrap/scss/bootstrap";
 

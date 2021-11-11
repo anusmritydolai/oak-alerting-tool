@@ -64,8 +64,8 @@
           <span class="card-heading1">
             Phase:
           </span>
-          <select class="form-select monthPicker" [(ngModel)]="selectedType">
-            <option *ngFor="let type of typeList" [value]="type">
+          <select class="form-select monthPicker" [(ngModel)]="selectedTypes">
+            <option *ngFor="let type of typeList2" [value]="type">
               {{ type }}
             </option>
           </select>
@@ -74,11 +74,21 @@
           <span class="card-heading1">
             Date Range:
           </span>
-          <select class="form-select monthPicker" [(ngModel)]="selectedType">
-            <option *ngFor="let type of typeList" [value]="type">
-              {{ type }}
-            </option>
-          </select>
+            <div class="input-group">
+              <span class="form-control" ngDefaultControl
+                 [(ngModel)]="selectedDate" [(bsValue)]="selectedDate" (bsValueChange)="updateMonth()"
+                 #dp="bsDaterangepicker" bsDaterangepicker
+                 [bsConfig]="{ rangeInputFormat : 'MMMM Do YYYY, h:mm:ss a', adaptivePosition: true, isAnimated: true, dateInputFormat: 'DD MMMM YYYY' }"
+                 [minDate]="minDate"
+                 [maxDate]="maxDate">{{selectedDate[0] | date:'dd-MM-yy'}} to {{selectedDate[1] | date:'dd-MM-yy'}}</span>
+                 <div class="input-group-append">
+                 <button class="btn btn-toggle"
+                    (click)="dp.toggle()"
+                    [attr.aria-expanded]="dp.isOpen"
+                    type="button"><fa-icon [icon]="faCalendar"></fa-icon>
+                </button>
+                </div>
+          </div>
         </div>
         <div class="gap">
           <button class="btn-login" (click)="show = !show" id="bt">Generate</button>
@@ -88,6 +98,6 @@
     </div>
   </div>
   <ng-container *ngIf="show">
-    <app-graphs [data]="hourlyCostData"></app-graphs>
+    <app-graphs [data]="hourlyCostData" (goto)="onClick()"></app-graphs>
   </ng-container>
 </div>

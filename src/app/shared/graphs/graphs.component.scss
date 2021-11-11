@@ -28,12 +28,11 @@
   }
   .add-new-btn{
     background-image: linear-gradient(to right, var(--color3) 0%, var(--color5) 51%, var(--color3) 100%);
-    width: 21%;
+    width: 28%;
     margin-left: auto;
     font-size: 1.5vw;
     padding: 0.5vw 2vw;
     text-align: center;
-    text-transform: uppercase;
     transition: 0.5s;
     background-size: 200% auto;
     color: white;
@@ -42,6 +41,7 @@
     border-color: #ffffff;
     display: block;
     font-weight: 800;
-    font-size: 0.75rem;
+    font: var(--fontBold);
+    font-size: 1.5vw;
     letter-spacing: 1px;
 }

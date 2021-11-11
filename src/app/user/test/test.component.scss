@@ -55,7 +55,7 @@
   min-width: 0;
 }
 .btn-login {
-  width: 100px;
+  width: 150px;
   border-radius: 25px;
   height: 40px;
   margin-left: 83px;
@@ -66,7 +66,9 @@
     #4164ad 51%,
     #364096 100%
   );
-  text-transform: uppercase;
+  font-weight: 800;
+  font: var(--fontBold);
+  font-size: 1.1vw;
   color: white;
 }
 
@@ -78,4 +80,8 @@
   span {
     min-width: 120px;
   }
+  select {
+    width: 270px;
+  }
 }
+

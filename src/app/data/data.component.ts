@@ -17,6 +17,8 @@ export class DataComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       if (params.data) this.data = JSON.parse(params.data);
+      console.log(params.data.dateRange);
+      
     });
     this.chart = new Chart({
       title: {
