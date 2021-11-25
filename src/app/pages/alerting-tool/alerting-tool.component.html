@@ -63,7 +63,7 @@
           <span class="card-heading1">
             Phase:
           </span>
-          <select class="form-select monthPicker" [(ngModel)]="selectedTypes">
+          <select class="form-select monthPicker" [(ngModel)]="selectedTypes" (change)="updateType()">
             <option *ngFor="let type of typeList2" [value]="type">
               {{ type }}
             </option>
@@ -90,7 +90,7 @@
           </div>
         </div>
         <div class="gap">
-          <button class="btn-login" (click)="show = !show" id="bt">Generate</button>
+          <button class="btn-login" (click)="showGraph()" id="bt">Generate</button>
         </div>
 
       </div>
