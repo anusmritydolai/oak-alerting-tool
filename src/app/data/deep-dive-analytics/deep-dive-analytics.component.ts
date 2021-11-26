@@ -1,21 +1,31 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import { Chart } from 'angular-highcharts';
+import { ApiService } from 'src/app/service/api.service';
 
 @Component({
   selector: 'app-deep-dive-analytics',
   templateUrl: './deep-dive-analytics.component.html',
   styleUrls: ['./deep-dive-analytics.component.scss']
 })
-export class DeepDiveAnalyticsComponent implements OnInit {
+export class DeepDiveAnalyticsComponent implements OnInit, AfterViewInit {
+  dataSource: MatTableDataSource<any> = new MatTableDataSource();
+  @ViewChild(MatPaginator) paginator: any;
   chart: any;
   pipe = new DatePipe('en-GB');
   start_date: Date = new Date();
   end_date: Date = new Date();
   type: string = '';
   phase: string = '';
-  constructor(private route: ActivatedRoute) {
+  data: any[]=[];
+  displayedColumns: string[] = [];
+  constructor(private route: ActivatedRoute, private apiService: ApiService) {
+  }
+  ngAfterViewInit(): void {    
+    this.dataSource.paginator = this.paginator;
   }
   
   ngOnInit(): void {
@@ -75,6 +85,18 @@ export class DeepDiveAnalyticsComponent implements OnInit {
         },
       ],
     });
+
+    this.apiService.test2().subscribe(data => {
+      this.displayedColumns = ['index'].concat(data.alert_table.columns).concat('Deep Analysis');
+      const dataSource = data.alert_table.data.map((dat: any[], i: number) => [data.alert_table.index[i]].concat(dat))      
+      this.dataSource = new MatTableDataSource(dataSource);
+      this.dataSource.paginator = this.paginator;
+      if (this.dataSource.paginator) {
+        this.dataSource.paginator.firstPage();
+      }
+    });
   }
+
+
 
 }

@@ -5,6 +5,8 @@ import { DataRoutingModule } from './data-routing.module';
 import { ChartModule, HIGHCHARTS_MODULES } from 'angular-highcharts';
 import { highchartsModules, SharedModule } from '../shared/shared.module';
 import { DeepDiveAnalyticsComponent } from './deep-dive-analytics/deep-dive-analytics.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [DeepDiveAnalyticsComponent],
@@ -12,7 +14,9 @@ import { DeepDiveAnalyticsComponent } from './deep-dive-analytics/deep-dive-anal
     CommonModule,
     DataRoutingModule,
     ChartModule,
-    SharedModule
+    SharedModule,
+    MatTableModule,
+    MatPaginatorModule
   ],
   providers: [{ provide: HIGHCHARTS_MODULES, useFactory: highchartsModules }],
 
