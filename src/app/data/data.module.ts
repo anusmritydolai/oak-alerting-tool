@@ -7,6 +7,8 @@ import { highchartsModules, SharedModule } from '../shared/shared.module';
 import { DeepDiveAnalyticsComponent } from './deep-dive-analytics/deep-dive-analytics.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [DeepDiveAnalyticsComponent],
@@ -16,7 +18,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     ChartModule,
     SharedModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatButtonModule,
+    MatSortModule
   ],
   providers: [{ provide: HIGHCHARTS_MODULES, useFactory: highchartsModules }],
 

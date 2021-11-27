@@ -110,13 +110,6 @@ export class GraphsComponent implements OnInit, OnChanges {
       threshold: null,
       color:'#7DC3BE',
     },
-    // {
-    //   name: 'Alerts',
-    //   data: this.stockChartData.alert_table,
-    //   type: 'line',
-    //   threshold: null,
-    //   color:'#7DD3BE',
-    // }
   ]
     });
   }

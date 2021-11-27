@@ -16,6 +16,7 @@ import { HeaderComponent } from './header/header.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { NgsAvaterModule } from 'ngs-avater';
+import { LineGraphComponent } from './line-graph/line-graph.component';
 
 
 export function highchartsModules() {
@@ -36,6 +37,7 @@ export function highchartsModules() {
   declarations: [
     GraphsComponent,
     HeaderComponent,
+    LineGraphComponent,
   ],
   imports: [
     CommonModule,
@@ -46,7 +48,8 @@ export function highchartsModules() {
   ],
   exports: [
     GraphsComponent, 
-    HeaderComponent
+    HeaderComponent,
+    LineGraphComponent
   ],
     
 

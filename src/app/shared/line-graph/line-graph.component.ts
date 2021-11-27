@@ -1,0 +1,114 @@
+import { Component, OnInit } from '@angular/core';
+import { Chart } from 'highcharts';
+
+@Component({
+  selector: 'app-line-graph',
+  templateUrl: './line-graph.component.html',
+  styleUrls: ['./line-graph.component.scss']
+})
+export class LineGraphComponent implements OnInit {
+  chart: any;
+
+  constructor() { }
+
+  ngOnInit(): void {
+    this.createGraph()
+  }
+
+  createGraph(): void {
+    this.chart = new Chart({
+      // chart:{
+      //   marginTop: 40,
+      //   height: 500,
+      //   events: {
+      //     load: function() {
+      //       var chart = this;
+      //       chart.renderer.text('Click on legends to modify chart',this.chartWidth/2.3,this.chartHeight-2)
+      //       .attr({
+      //         zIndex: 3,
+      //         fill: 'black'
+      //       })
+      //       .add();
+      //     }
+      //   }
+      // },
+      // exporting: { 
+      //   enabled: false 
+      // },
+      title: {
+          text: 'Solar Employment Growth by Sector, 2010-2016'
+      },
+  
+      subtitle: {
+          text: 'Source: thesolarfoundation.com'
+      },
+  
+      yAxis: {
+          title: {
+              text: 'Number of Employees'
+          }
+      },
+  
+      xAxis: {
+          accessibility: {
+              rangeDescription: 'Range: 2010 to 2017'
+          }
+      },
+  
+      legend: {
+          layout: 'vertical',
+          align: 'right',
+          verticalAlign: 'middle'
+      },
+  
+      plotOptions: {
+          series: {
+              label: {
+                  connectorAllowed: false
+              },
+              pointStart: 2010
+          }
+      },
+  
+      series: [
+        {
+          name: 'Installation',
+          type: 'line',
+          data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
+      }, {
+          name: 'Manufacturing',
+          type: 'line',
+          data: [24916, 24064, 29742, 29851, 32490, 30282, 38121, 40434]
+      }, {
+          name: 'Sales & Distribution',
+          type: 'line',
+          data: [11744, 17722, 16005, 19771, 20185, 24377, 32147, 39387]
+      }, {
+          name: 'Project Development',
+          type: 'line',
+          data: [null, null, 7988, 12169, 15112, 22452, 34400, 34227]
+      }, {
+          name: 'Other',
+          type: 'line',
+          data: [12908, 5948, 8105, 11248, 8989, 11816, 18274, 18111]
+      }],
+  
+      responsive: {
+          rules: [{
+              condition: {
+                  maxWidth: 500
+              },
+              chartOptions: {
+                  legend: {
+                      layout: 'horizontal',
+                      align: 'center',
+                      verticalAlign: 'bottom'
+                  }
+              }
+          }]
+      }
+  
+  });
+  }
+
+}

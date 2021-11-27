@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import { Chart } from 'angular-highcharts';
 import { ApiService } from 'src/app/service/api.service';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-deep-dive-analytics',
@@ -13,7 +14,10 @@ import { ApiService } from 'src/app/service/api.service';
 })
 export class DeepDiveAnalyticsComponent implements OnInit, AfterViewInit {
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
+  dataSource2: MatTableDataSource<any> = new MatTableDataSource();
   @ViewChild(MatPaginator) paginator: any;
+  @ViewChild('paginator2') paginator2: any;
+  @ViewChild(MatSort) sort: any;
   chart: any;
   pipe = new DatePipe('en-GB');
   start_date: Date = new Date();
@@ -22,10 +26,13 @@ export class DeepDiveAnalyticsComponent implements OnInit, AfterViewInit {
   phase: string = '';
   data: any[]=[];
   displayedColumns: string[] = [];
+  displayedColumns2: string[] = [];
   constructor(private route: ActivatedRoute, private apiService: ApiService) {
   }
   ngAfterViewInit(): void {    
     this.dataSource.paginator = this.paginator;
+    this.dataSource2.paginator = this.paginator2;
+    this.dataSource2.sort = this.sort;
   }
   
   ngOnInit(): void {
@@ -35,58 +42,8 @@ export class DeepDiveAnalyticsComponent implements OnInit, AfterViewInit {
       this.type = params.type;
       this.phase = params.phase;      
     });
-    this.chart = new Chart({
-      title: {
-        text: '',
-      },
-      legend: {
-        enabled: false,
-      },
-      exporting: { enabled: false },
-      xAxis: {
-        title: {
-          text: 'Hours',
-        },
-        tickInterval: 10,
-      },
-      yAxis: {
-        title: {
-          text: 'Cost (£)',
-        },
-      },
-      plotOptions: {
-        area: {
-          fillColor: {
-            linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
-            stops: [
-              [0, '#d7e6e991'],
-              [1, '#d7e6e991'],
-            ],
-          },
-          lineWidth: 2,
-          marker: {
-            enabled: false,
-          },
-          shadow: false,
-          states: {
-            hover: {
-              lineWidth: 1,
-            },
-          },
-          threshold: null,
-        },
-      },
-      series: [
-        {
-          name: 'Cost (£)',
-          type: 'area',
-          pointInterval: 10,
-         data: [49.9, 106.4, 60.2, 104.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4],
-        },
-      ],
-    });
 
-    this.apiService.test2().subscribe(data => {
+    this.apiService.test().subscribe(data => {
       this.displayedColumns = ['index'].concat(data.alert_table.columns).concat('Deep Analysis');
       const dataSource = data.alert_table.data.map((dat: any[], i: number) => [data.alert_table.index[i]].concat(dat))      
       this.dataSource = new MatTableDataSource(dataSource);
@@ -95,8 +52,88 @@ export class DeepDiveAnalyticsComponent implements OnInit, AfterViewInit {
         this.dataSource.paginator.firstPage();
       }
     });
+
   }
+  
+  show2(element: any) {
+    console.log(element);
+    this.apiService.test2().subscribe(data => {
+      data[''].columns = data[''].columns.map((column: any[]) => column[0]+' '+column[1])      
+      this.displayedColumns2 = ['index'].concat(data[''].columns);      
+      const dataSource = data[''].data.map((dat: any[], i: number) => [data[''].index[i]].concat(dat))            
+      this.dataSource2 = new MatTableDataSource(dataSource);
+      this.dataSource2.sort = this.sort;
+      this.dataSource2.paginator = this.paginator2;
+      if (this.dataSource2.paginator) {
+        this.dataSource2.paginator.firstPage();
+      }
 
-
+      this.chart = new Chart({
+        title: {
+          text: ''
+      },
+      subtitle: {
+          text: ''
+      },
+      yAxis: {
+          title: {
+              text: 'Energy (kWh)'
+          }
+      },
+      xAxis: {
+          accessibility: {
+              rangeDescription: ''
+          }
+      },
+      legend: {
+        enabled:true,
+        align: 'center',
+        symbolPadding: 10,
+        symbolWidth: 70,
+        itemDistance: 50,
+        itemStyle:{
+          fontSize:'14px',
+          fontWeight:'bold',
+          textOverflow:'ellipsis',
+          padding:'30px'
+          }
+      },
+      plotOptions: {
+          series: {
+              label: {
+                  connectorAllowed: false
+              },
+              pointStart: 2010
+          }
+      },
+      series: [
+        {
+          name: 'Energy',
+          type: 'line',
+          data: data.graph2_table1.data
+      }, {
+          name: 'threshold',
+          type: 'line',
+          data: data.graph2_table2.data
+      }],
+  
+      responsive: {
+          rules: [{
+              condition: {
+                  maxWidth: 500
+              },
+              chartOptions: {
+                  legend: {
+                      layout: 'horizontal',
+                      align: 'center',
+                      verticalAlign: 'bottom'
+                  }
+              }
+          }]
+      }
+      });
+    });
+    
+  }
 
 }

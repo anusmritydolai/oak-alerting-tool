@@ -75,7 +75,7 @@ export class AlertingToolComponent implements OnInit {
   }
 
   showGraph() {
-    this.apiService.getStockChartData().subscribe(data => {
+    this.apiService.test().subscribe(data => {
       Object.keys(data).map((key, index) => {
         const x: any[] = data[key].data.map((context: any[]) => context.map(aa=>+aa ? +aa : 0)).slice(0, 150);
         // const x: any[] = data[key].data.map((context: any[]) => context[0]).slice(0, 150);
