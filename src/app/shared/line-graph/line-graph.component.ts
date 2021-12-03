@@ -16,25 +16,7 @@ export class LineGraphComponent implements OnInit {
   }
 
   createGraph(): void {
-    this.chart = new Chart({
-      // chart:{
-      //   marginTop: 40,
-      //   height: 500,
-      //   events: {
-      //     load: function() {
-      //       var chart = this;
-      //       chart.renderer.text('Click on legends to modify chart',this.chartWidth/2.3,this.chartHeight-2)
-      //       .attr({
-      //         zIndex: 3,
-      //         fill: 'black'
-      //       })
-      //       .add();
-      //     }
-      //   }
-      // },
-      // exporting: { 
-      //   enabled: false 
-      // },
+    this.chart = new Chart({  
       title: {
           text: 'Solar Employment Growth by Sector, 2010-2016'
       },
@@ -73,7 +55,7 @@ export class LineGraphComponent implements OnInit {
       series: [
         {
           name: 'Installation',
-          type: 'line',
+          type: 'area',
           data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
       }, {
           name: 'Manufacturing',

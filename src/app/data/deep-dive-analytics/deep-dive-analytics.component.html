@@ -73,7 +73,32 @@
     </div>
     <div class="card card-custom" [style.display]="displayedColumns2.length > 0 ? 'block' : 'none'">
       <div class="card-heading">Anayltical Plots for {{ phase }} (kWh)</div>
-      <div [chart]="chart"></div>
+      <!-- <div class="row">
+        <div class="col-md-6"></div>
+        <div class="col-md-6"></div>
+      </div> -->
+
+      <div>
+        <div class="row" style="min-height: 420px;">
+          <div [chart]="chart" class="col-md-6"></div>
+          <app-area-graph style="min-height: 200px;" [data]="chart4" class="col-md-6"></app-area-graph>
+        </div>
+        <div class="row" style="min-height: 420px;">
+          <div [chart]="chart2" class="col-md-6"></div>
+          <app-bar-graph style="min-height: 200px;" [data]="chart3" class="col-md-6"></app-bar-graph>
+        </div>
+      </div>
+
+         <!-- <div class="row">
+          <div class="col-sm-6"  [chart]="chart">
+           
+          </div>
+          <div class="col-sm-6"  [chart]="chart">
+          
+          </div>
+        </div>  -->
+
+
       <div class="card-heading">
         Tabular Format
         <table
