@@ -19,6 +19,7 @@ import { NgsAvaterModule } from 'ngs-avater';
 import { LineGraphComponent } from './line-graph/line-graph.component';
 import { BarGraphComponent } from './bar-graph/bar-graph.component';
 import { AreaGraphComponent } from './area-graph/area-graph.component';
+import { AreaLineGraphComponent } from './area-line-graph/area-line-graph.component';
 
 
 export function highchartsModules() {
@@ -42,6 +43,7 @@ export function highchartsModules() {
     LineGraphComponent,
     BarGraphComponent,
     AreaGraphComponent,
+    AreaLineGraphComponent,
   ],
   imports: [
     CommonModule,
@@ -56,6 +58,7 @@ export function highchartsModules() {
     LineGraphComponent,
     BarGraphComponent,
     AreaGraphComponent,
+    AreaLineGraphComponent,
   ],
     
 

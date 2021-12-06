@@ -1,9 +1,7 @@
 import {
-  AfterViewInit,
   Component,
   Input,
   OnChanges,
-  OnInit,
   SimpleChanges,
 } from '@angular/core';
 import { Chart } from 'angular-highcharts';
