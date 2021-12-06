@@ -50,12 +50,15 @@ averages = [
         type: 'datetime',
         accessibility: {
             rangeDescription: 'Range: Jul 30-08 to Jul 05-09'
-        }
+        },
+        title: {
+          text: 'Date (DD-MM)',
+      }
     },
 
     yAxis: {
         title: {
-            text: null
+            text: 'Energy (kWh)',
         }
     },
 
@@ -65,15 +68,15 @@ averages = [
     },
 
     series: [{
-      name: 'Temperature',
+      name: '',
       type: 'line',
       data: this.averages,
       zIndex: 1,
   }, {
       name: 'Range',
-      data: this.ranges,
       type: 'arearange',
-      lineWidth: 0,
+      data: this.ranges,
+      lineWidth: 1,
       linkedTo: ':previous',
       fillOpacity: 0.3,
       zIndex: 0,
