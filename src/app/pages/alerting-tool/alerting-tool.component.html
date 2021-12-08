@@ -5,8 +5,8 @@
     <span class="widget-subtitle"
       >Summary of all the alerts that has been generated in the system</span
     >
-    <div class="spa">
-      <table class="table table-bordered">
+    <div class="row">
+      <table class="table table-bordered col-md-6">
         <thead>
           <tr>
             <th scope="col"></th>
@@ -48,12 +48,12 @@
         </tbody>
       </table>
       <div>
-        <div class="card-heading">Generate Analysis Report</div>
+        <div class="card-heading gap">Generate Analysis Report</div>
         <div class="gap">
           <span class="card-heading1">
             Parameter:
           </span>
-          <select class="form-select monthPicker" [(ngModel)]="selectedType">
+          <select class="form-select monthPicker" [(ngModel)]="selectedType" placeholder="Voltage Imbalance">
             <option *ngFor="let type of typeList" [value]="type">
               {{ type }}
             </option>
@@ -63,8 +63,8 @@
           <span class="card-heading1">
             Phase:
           </span>
-          <select class="form-select monthPicker" [(ngModel)]="selectedTypes" (change)="updateType()">
-            <option *ngFor="let type of typeList2" [value]="type">
+          <select class="form-select monthPicker" [(ngModel)]="selectedTypes" (change)="updateType()" placeholder="Main 1">
+            <option *ngFor="let type of typeList2" [value]="type" >
               {{ type }}
             </option>
           </select>
@@ -90,7 +90,7 @@
           </div>
         </div>
         <div class="gap">
-          <button class="btn-login" (click)="showGraph()" id="bt">Generate</button>
+          <button class="btn-login" (click)="showGraph()" id="bt" [disabled]="!(this.selectedTypes && this.selectedDate)">Generate</button>
         </div>
 
       </div>

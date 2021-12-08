@@ -5,7 +5,9 @@
 export const environment = {
   production: false
 };
-export const serviceBaseUrl =  'http://oak-alerts.com/alert/api';
+export const serviceBaseUrl =  'https://api.oak-alerts.com/alert/api/v1/';
+export const serviceLoginUrl = 'https://api.oak-insights.com/';
+
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

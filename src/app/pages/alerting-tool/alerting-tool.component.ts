@@ -14,20 +14,15 @@ export class AlertingToolComponent implements OnInit {
   pipe = new DatePipe('en-GB');
   chart: any;
   faCalendar = faCalendarAlt;
-  selectedType: string = 'Voltage Imbalance';
+  selectedType?: string;
   typeList: string[] = [
     'Voltage Imbalance',
     'Load Imbalance',
     'Low Power Factor',
     'Abnormal Change In Energy Con',
   ];
-  selectedTypes: string = 'Main 1 L3';
-  typeList2: string[] = [
-    'Main 1',
-    'Main 1 L1',
-    'Main 1 L2',
-    'Main 1 L3',
-  ];
+  selectedTypes?: string;
+  typeList2: string[] = [];
   minDate: Date = new Date();
   maxDate: Date = new Date();
   selectedDate: any = [new Date(), new Date()];
@@ -42,22 +37,13 @@ export class AlertingToolComponent implements OnInit {
     this.maxDate.setMonth(this.maxDate.getMonth());
   }
 
-  ngOnInit(): void {}
-  updateMonth() {
-    console.log(this.selectedDate);
-    // if(this.selectedGraph == 'phase')
-    this.apiService.getStockChartData().subscribe(data => {
-      console.log(data);
-      
-
-    })
-    
-    // this.selectedMonth = {
-    //   month: this.pipe.transform(this.selectedDate, 'MMMM'),
-    //   year: this.pipe.transform(this.selectedDate, 'YYYY')
-    // };
+  ngOnInit(): void {
+    this.updateMonth()
   }
-  // {{path}}/deepDiveAnalytics?type=Abnormal&phase=Main1&start_date=2021-06-01&end_date=2021-11-10
+  updateMonth() {
+    this.apiService.getStockChartData(localStorage.getItem('site_slug')).subscribe(data => this.typeList2 = data)
+  }
+
   onClick() {  
     const data = {
       selectedType: this.selectedType,
@@ -74,11 +60,28 @@ export class AlertingToolComponent implements OnInit {
 
   }
 
-  showGraph() {
-    this.apiService.test().subscribe(data => {
+  showGraph() {    
+    if(!this.selectedType || !this.selectedTypes || !this.selectedDate) return;
+    // var y = this.selectedTypes.split(' ');
+    // y[0] = y[0].split('-')[1];
+    // y[0] = y[0].substr(0, y[0].length - 1) + ' 1';
+    // const threshold = y.splice(1, 1)[0];
+    // console.log(this.pipe.transform(this.selectedDate[1]));
+    
+    const data = {
+      alert_analyse: this.selectedType,
+      phase: this.selectedTypes,
+      threshold: 0.95,
+      site_name: localStorage.getItem('site_slug'),
+      start_date: this.pipe.transform(this.selectedDate[0], 'YYYY-MM-dd') + ' 00:00:00',
+      end_date: this.pipe.transform(this.selectedDate[1], 'YYYY-MM-dd') + ' 23:59:59'
+    };
+    console.log(data);
+    
+    this.apiService.test(data).subscribe(data => {
       Object.keys(data).map((key, index) => {
-        const x: any[] = data[key].data.map((context: any[]) => context.map(aa=>+aa ? +aa : 0)).slice(0, 150);
-        // const x: any[] = data[key].data.map((context: any[]) => context[0]).slice(0, 150);
+        data[key] = JSON.parse(data[key])
+        const x: any[] = data[key].data.map((context: any[]) => context.map(aa=>+aa ? +aa : 0));
         data[key] = x;
       });
       this.hourlyCostData = data;

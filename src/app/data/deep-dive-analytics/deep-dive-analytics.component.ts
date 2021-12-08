@@ -20,8 +20,8 @@ export class DeepDiveAnalyticsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort: any;
   chart: any;
   pipe = new DatePipe('en-GB');
-  start_date: Date = new Date();
-  end_date: Date = new Date();
+  start_date: string = '';
+  end_date: string = '';
   type: string = '';
   phase: string = '';
   data: any[]=[];
@@ -41,14 +41,24 @@ export class DeepDiveAnalyticsComponent implements OnInit, AfterViewInit {
   
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      this.start_date = new Date(params.start_date);
-      this.end_date = new Date(params.end_date);
+      this.start_date = params.start_date;
+      this.end_date = params.end_date;
       this.type = params.type;
       this.phase = params.phase;      
     });
 
-    this.apiService.test().subscribe(data => {
-      this.displayedColumns = ['index'].concat(data.alert_table.columns).concat('Deep Analysis');
+    const data = {
+      alert_analyse: this.type,
+      phase: this.phase,
+      threshold: 0.95,
+      site_name: localStorage.getItem('site_slug'),
+      start_date: this.start_date + ' 00:00:00',
+      end_date: this.end_date + ' 23:59:59'
+    };
+
+    this.apiService.test(data).subscribe(data => {      
+      Object.keys(data).map((key, index) => { data[key] = JSON.parse(data[key]) });      
+      this.displayedColumns = ['index'].concat(data.alert_table.columns).concat('Deep Analysis');      
       const dataSource = data.alert_table.data.map((dat: any[], i: number) => [data.alert_table.index[i]].concat(dat))      
       this.dataSource = new MatTableDataSource(dataSource);
       this.dataSource.paginator = this.paginator;
@@ -60,11 +70,20 @@ export class DeepDiveAnalyticsComponent implements OnInit, AfterViewInit {
   }
   
   show2(element: any) {
-    console.log(element);
-    this.apiService.test2().subscribe(data => {
-      data[''].columns = data[''].columns.map((column: any[]) => column[0]+' '+column[1])      
-      this.displayedColumns2 = ['index'].concat(data[''].columns);      
-      const dataSource = data[''].data.map((dat: any[], i: number) => [data[''].index[i]].concat(dat))            
+    this.apiService.test2({
+      alert_analyse: this.type,
+      phase: this.phase,
+      threshold: 0.95,
+      site_name: localStorage.getItem('site_slug'),
+      start_date: this.start_date + ' 00:00:00',
+      end_date: this.end_date + ' 23:59:59',
+      alert_no: 1,
+    }).subscribe(data => {
+      console.log(data)
+      Object.keys(data).map((key, index) => { data[key] = JSON.parse(data[key]) });      
+      data.Mix_Max_Table.columns = data.Mix_Max_Table.columns.map((column: any[]) => column[0]+' '+column[1])      
+      this.displayedColumns2 = ['index'].concat(data.Mix_Max_Table.columns);      
+      const dataSource = data.Mix_Max_Table.data.map((dat: any[], i: number) => [data.Mix_Max_Table.index[i]].concat(dat))            
       this.dataSource2 = new MatTableDataSource(dataSource);
       this.dataSource2.sort = this.sort;
       this.dataSource2.paginator = this.paginator2;

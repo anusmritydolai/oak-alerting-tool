@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BsDatepickerModule, BsDaterangepickerDirective, DatepickerModule } from 'ngx-bootstrap/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 
@@ -24,7 +25,7 @@ import { BsDatepickerModule, BsDaterangepickerDirective, DatepickerModule } from
     FontAwesomeModule,
     BsDatepickerModule.forRoot(),
     DatepickerModule.forRoot(),
-    // BsDaterangepickerM
+    MatFormFieldModule,
   ]
 })
 export class UserModule { }
