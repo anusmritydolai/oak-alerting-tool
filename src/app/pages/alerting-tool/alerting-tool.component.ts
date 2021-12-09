@@ -76,12 +76,12 @@ export class AlertingToolComponent implements OnInit {
       start_date: this.pipe.transform(this.selectedDate[0], 'YYYY-MM-dd') + ' 00:00:00',
       end_date: this.pipe.transform(this.selectedDate[1], 'YYYY-MM-dd') + ' 23:59:59'
     };
-    console.log(data);
     
     this.apiService.test(data).subscribe(data => {
       Object.keys(data).map((key, index) => {
         data[key] = JSON.parse(data[key])
-        const x: any[] = data[key].data.map((context: any[]) => context.map(aa=>+aa ? +aa : 0));
+        const x: any = {data: data[key].data.map((context: any[]) => context.map(aa=>+aa ? +aa : 0)), columns: data[key].columns};
+        console.log(x);
         data[key] = x;
       });
       this.hourlyCostData = data;

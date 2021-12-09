@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { StockChart } from 'angular-highcharts';
+import { Chart } from 'angular-highcharts';
 
 @Component({
   selector: 'app-graphs',
@@ -19,7 +20,7 @@ export class GraphsComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.stockChartData) {
       console.log(this.stockChartData)
-    this.chart = new StockChart({
+    this.chart = new Chart({
       chart:{
         marginTop: 40,
         height: 500,
@@ -90,22 +91,22 @@ export class GraphsComponent implements OnInit, OnChanges {
             selected: 0
         },
     series: [{
-      name: 'Main L1',
-      data: this.stockChartData.graph1_table1,
+      name: this.stockChartData.graph1_table1.columns[1],
+      data: this.stockChartData.graph1_table1.data,
       type: 'line',
       threshold: null,
       color:'#4164AD',
     },
     {
-      name: 'Main L2',
-      data: this.stockChartData.graph1_table2,
+      name: this.stockChartData.graph1_table2.columns[1],
+      data: this.stockChartData.graph1_table2.data,
       type: 'line',
       threshold: null,
       color:'#F3837A',
     },
     {
-      name: 'Main L3',
-      data: this.stockChartData.graph1_table3,
+      name: this.stockChartData.graph1_table3.columns[1],
+      data: this.stockChartData.graph1_table3.data,
       type: 'line',
       threshold: null,
       color:'#7DC3BE',

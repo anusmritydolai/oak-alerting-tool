@@ -57,7 +57,9 @@ export class DeepDiveAnalyticsComponent implements OnInit, AfterViewInit {
     };
 
     this.apiService.test(data).subscribe(data => {      
-      Object.keys(data).map((key, index) => { data[key] = JSON.parse(data[key]) });      
+      Object.keys(data).map((key, index) => { data[key] = JSON.parse(data[key]) });
+      console.log(data);
+      
       this.displayedColumns = ['index'].concat(data.alert_table.columns).concat('Deep Analysis');      
       const dataSource = data.alert_table.data.map((dat: any[], i: number) => [data.alert_table.index[i]].concat(dat))      
       this.dataSource = new MatTableDataSource(dataSource);
@@ -79,8 +81,8 @@ export class DeepDiveAnalyticsComponent implements OnInit, AfterViewInit {
       end_date: this.end_date + ' 23:59:59',
       alert_no: 1,
     }).subscribe(data => {
-      console.log(data)
       Object.keys(data).map((key, index) => { data[key] = JSON.parse(data[key]) });      
+      console.log(data)
       data.Mix_Max_Table.columns = data.Mix_Max_Table.columns.map((column: any[]) => column[0]+' '+column[1])      
       this.displayedColumns2 = ['index'].concat(data.Mix_Max_Table.columns);      
       const dataSource = data.Mix_Max_Table.data.map((dat: any[], i: number) => [data.Mix_Max_Table.index[i]].concat(dat))            
@@ -131,14 +133,18 @@ export class DeepDiveAnalyticsComponent implements OnInit, AfterViewInit {
       },
       series: [
         {
-          name: 'Energy',
+          name: data.graph2_table1.columns[1],
           type: 'line',
           data: data.graph2_table1.data
       }, {
-          name: 'threshold',
+          name: data.graph2_table2.columns[1],
           type: 'line',
           data: data.graph2_table2.data
-      }],
+      }, {
+        name: data.graph2_table3.columns[1],
+        type: 'line',
+        data: data.graph2_table3.data
+    }],
   
       responsive: {
           rules: [{
@@ -196,14 +202,19 @@ export class DeepDiveAnalyticsComponent implements OnInit, AfterViewInit {
       },
       series: [
         {
-          name: 'Energy',
+          name: data.graph3_table1.columns[1],
           type: 'line',
           data: data.graph2_table1.data
       }, {
-          name: 'threshold',
+          name: data.graph3_table2.columns[1],
           type: 'line',
           data: data.graph2_table2.data
-      }],
+      },
+      {
+        name: data.graph3_table3.columns[1],
+        type: 'line',
+        data: data.graph2_table1.data
+    }],
   
       responsive: {
           rules: [{
