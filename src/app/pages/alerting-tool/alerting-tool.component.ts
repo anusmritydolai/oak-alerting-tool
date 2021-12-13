@@ -19,7 +19,7 @@ export class AlertingToolComponent implements OnInit {
     'Voltage Imbalance',
     'Load Imbalance',
     'Low Power Factor',
-    'Abnormal Change In Energy Con',
+    'Abnormal Change In Energy Consumption',
   ];
   selectedTypes?: string;
   typeList2: string[] = [];

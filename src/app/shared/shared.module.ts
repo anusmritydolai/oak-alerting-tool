@@ -20,6 +20,9 @@ import { LineGraphComponent } from './line-graph/line-graph.component';
 import { BarGraphComponent } from './bar-graph/bar-graph.component';
 import { AreaGraphComponent } from './area-graph/area-graph.component';
 import { AreaLineGraphComponent } from './area-line-graph/area-line-graph.component';
+import { DialogComponent } from './header/dialog/dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 
 
 export function highchartsModules() {
@@ -44,6 +47,7 @@ export function highchartsModules() {
     BarGraphComponent,
     AreaGraphComponent,
     AreaLineGraphComponent,
+    DialogComponent,
   ],
   imports: [
     CommonModule,
@@ -51,6 +55,8 @@ export function highchartsModules() {
     BsDatepickerModule,
     BsDropdownModule.forRoot(),
     NgsAvaterModule,
+    MatDialogModule,
+    MatButtonModule
   ],
   exports: [
     GraphsComponent, 
@@ -59,6 +65,7 @@ export function highchartsModules() {
     BarGraphComponent,
     AreaGraphComponent,
     AreaLineGraphComponent,
+    DialogComponent
   ],
     
 

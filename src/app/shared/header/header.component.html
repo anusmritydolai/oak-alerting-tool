@@ -4,20 +4,10 @@
     <ngs-avater
       class="pointer1"
       size="48px"
-      isFixedColor="#FFFFFF"
-      imageSize="48px"
-      (click)="dropdown.toggle(true)"
+      isFixedColor="#e5f2fb"
+      imageSize="32px"
+      photoUrl="/assets/power.png"
+      (click)="logout()"
     ></ngs-avater>
-    <ul
-      id="dropdown-triggers-manual"
-      *dropdownMenu
-      class="dropdown-menu pointer"
-      role="menu"
-      aria-labelledby="button-triggers-manual"
-    >
-      <li role="menuitem">
-        <a class="dropdown-item" (click)="logout()">Logout</a>
-      </li>
-    </ul>
   </div>
 </div>

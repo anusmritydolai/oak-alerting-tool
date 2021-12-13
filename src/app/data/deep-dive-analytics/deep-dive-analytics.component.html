@@ -12,6 +12,17 @@
           <!--- Note that these columns can be defined in any order.
             The actual rendered columns are set as a property on the row definition" -->
 
+            <!-- <ng-container *ngFor="let row of displayedColumns; index as i">
+              <ng-container matColumnDef="{{ row }}">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                  {{ row }}
+                  <button mat-button color="primary" *ngIf="displayedColumns.length-- ==" (click)="show2(element)">
+                    Plot Graphs for Analysis
+                  </button>
+                </th>
+                <td mat-cell *matCellDef="let element">{{ element[i] }}</td>
+              </ng-container>
+            </ng-container> -->
           <!-- Position Column -->
           <ng-container matColumnDef="{{ displayedColumns[0] }}">
             <th mat-header-cell *matHeaderCellDef>{{ displayedColumns[0] }}</th>
