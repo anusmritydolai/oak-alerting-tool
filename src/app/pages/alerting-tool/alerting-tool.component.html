@@ -6,6 +6,7 @@
       >Summary of all the alerts that has been generated in the system</span
     >
     <div class="row">
+    <div class="col-md-6">
       <table class="table table-bordered col-md-6">
         <thead>
           <tr>
@@ -47,6 +48,8 @@
           </tr>
         </tbody>
       </table>
+    </div>
+    <div class="col-md-6">
       <div>
         <div class="card-heading gap">Generate Analysis Report</div>
         <div class="gap">
@@ -89,11 +92,12 @@
                 </div>
           </div>
         </div>
-        <div class="gap">
+        <div class="text-center">
           <button class="btn-login" (click)="showGraph()" id="bt" [disabled]="!(this.selectedTypes && this.selectedDate)">Generate</button>
         </div>
 
       </div>
+    </div>
     </div>
   </div>
   <ng-container *ngIf="show">

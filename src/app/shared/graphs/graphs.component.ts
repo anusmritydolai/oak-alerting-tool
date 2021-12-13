@@ -20,7 +20,7 @@ export class GraphsComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.stockChartData) {
       console.log(this.stockChartData)
-    this.chart = new Chart({
+    this.chart = new StockChart({
       chart:{
         marginTop: 40,
         height: 500,

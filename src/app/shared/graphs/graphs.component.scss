@@ -26,7 +26,7 @@
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
   .consumption-line{
-    width: 90% !important;
+    width: 100% !important;
    }
 }
 .add-new-btn {
@@ -36,10 +36,10 @@
     var(--color5) 51%,
     var(--color3) 100%
   );
-  width: 28%;
   margin-left: auto;
-  font-size: 1.5vw;
-  padding: 0.5vw 2vw;
+  margin-top: 2rem;
+  font-size: 1vw;
+  padding: 0.5vw 1.5vw;
   text-align: center;
   transition: 0.5s;
   background-size: 200% auto;
@@ -48,9 +48,7 @@
   border-radius: 100px;
   border-color: #ffffff;
   display: block;
-  font-weight: 800;
-  font: var(--fontBold);
-  font-size: 1.5vw;
+  font-weight: 700;
   letter-spacing: 1px;
 }
 
