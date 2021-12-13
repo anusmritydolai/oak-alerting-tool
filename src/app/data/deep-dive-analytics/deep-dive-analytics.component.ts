@@ -30,6 +30,7 @@ export class DeepDiveAnalyticsComponent implements OnInit, AfterViewInit {
   chart2: any;
   chart3 = {"seq":["Operating","Non Operating","Preparatory","Closed"],"x_axis":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"y_axis":null,"values_open":[315.35,269.63,234.42,254.55,257.25,503.9,278.98],"values_preparatory":[177.84,196.43,145.63,159.24,147.82,113.87,81.32],"values_non_operating":[236.43,173.52,137.67,151.76,149.76,105.61,162.83],"values_closed":[0,0,0,0,0,0,0],"open_total":2114,"preparatory_total":1022,"non_operating_total":1118,"closed_total":0}
   chart4 = {"seq":["Operating","Non Operating","Preparatory","Closed"],"x_axis":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"y_axis":null,"values_open":[315.35,269.63,234.42,254.55,257.25,503.9,278.98],"values_preparatory":[177.84,196.43,145.63,159.24,147.82,113.87,81.32],"values_non_operating":[236.43,173.52,137.67,151.76,149.76,105.61,162.83],"values_closed":[0,0,0,0,0,0,0],"open_total":2114,"preparatory_total":1022,"non_operating_total":1118,"closed_total":0}
+  threshold: number = 0.95;
 
   constructor(private route: ActivatedRoute, private apiService: ApiService) {
   }
@@ -44,13 +45,14 @@ export class DeepDiveAnalyticsComponent implements OnInit, AfterViewInit {
       this.start_date = params.start_date;
       this.end_date = params.end_date;
       this.type = params.type;
-      this.phase = params.phase;      
+      this.phase = params.phase;   
+      this.threshold = params.threshold;   
     });
 
     const data = {
       alert_analyse: this.type,
       phase: this.phase,
-      threshold: 0.95,
+      threshold: this.threshold,
       site_name: localStorage.getItem('site_slug'),
       start_date: this.start_date + ' 00:00:00',
       end_date: this.end_date + ' 23:59:59'

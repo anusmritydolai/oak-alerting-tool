@@ -14,12 +14,12 @@ export class AlertingToolComponent implements OnInit {
   pipe = new DatePipe('en-GB');
   chart: any;
   faCalendar = faCalendarAlt;
-  selectedType?: string;
-  typeList: string[] = [
-    'Voltage Imbalance',
-    'Load Imbalance',
-    'Low Power Factor',
-    'Abnormal Change In Energy Consumption',
+  selectedType?: any;
+  typeList: any[] = [
+    {name: 'Voltage Imbalance', value: 2},
+    {name: 'Load Imbalance', value: 15},
+    {name: 'Low Power Factor', value: 0.95},
+    {name: 'Abnormal Change In Energy Consumption'},
   ];
   selectedTypes?: string;
   typeList2: string[] = [];
@@ -44,14 +44,15 @@ export class AlertingToolComponent implements OnInit {
     this.apiService.getStockChartData(localStorage.getItem('site_slug')).subscribe(data => this.typeList2 = data)
   }
 
-  onClick() {  
+  onClick() { 
     const data = {
-      selectedType: this.selectedType,
+      selectedType: this.selectedType.name,
       selectedTypes: this.selectedTypes,
+      threshold: this.selectedType.value ? this.selectedType.value : 0.95,
       dateRange: this.selectedDate
     }
-    const url = location.origin + "/deepDiveAnalytics?type=" + this.selectedType + "&phase=" + this.selectedTypes +
-      "&start_date=" + this.pipe.transform(this.selectedDate[0], 'YYYY-MM-dd') + "&end_date=" + this.pipe.transform(this.selectedDate[1], 'YYYY-MM-dd');
+    const url = location.origin + "/deepDiveAnalytics?type=" + data.selectedType + "&phase=" + data.selectedTypes + "&threshold=" + data.threshold +
+      "&start_date=" + this.pipe.transform(data.dateRange[0], 'YYYY-MM-dd') + "&end_date=" + this.pipe.transform(data.dateRange[1], 'YYYY-MM-dd');
     console.log(url);
     window.open(url, "_blank");
   }
@@ -60,7 +61,9 @@ export class AlertingToolComponent implements OnInit {
 
   }
 
-  showGraph() {    
+  showGraph() {
+    console.log(this.selectedType);
+     
     if(!this.selectedType || !this.selectedTypes || !this.selectedDate) return;
     // var y = this.selectedTypes.split(' ');
     // y[0] = y[0].split('-')[1];
@@ -69,9 +72,9 @@ export class AlertingToolComponent implements OnInit {
     // console.log(this.pipe.transform(this.selectedDate[1]));
     
     const data = {
-      alert_analyse: this.selectedType,
+      alert_analyse: this.selectedType.name,
       phase: this.selectedTypes,
-      threshold: 0.95,
+      threshold: this.selectedType.value ? this.selectedType.value : 0.95,
       site_name: localStorage.getItem('site_slug'),
       start_date: this.pipe.transform(this.selectedDate[0], 'YYYY-MM-dd') + ' 00:00:00',
       end_date: this.pipe.transform(this.selectedDate[1], 'YYYY-MM-dd') + ' 23:59:59'

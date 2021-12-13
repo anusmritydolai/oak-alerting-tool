@@ -90,13 +90,13 @@
       </div> -->
 
       <div>
-        <div class="row" style="min-height: 420px;">
+        <div class="row" class="graph-height">
           <div [chart]="chart" class="col-md-6"></div>
-          <app-area-graph style="min-height: 200px;" [data]="chart4" class="col-md-6"></app-area-graph>
+          <app-area-graph class="graph-height" [data]="chart4" class="col-md-6"></app-area-graph>
         </div>
-        <div class="row" style="min-height: 420px;">
+        <div class="row" class="graph-height">
           <div [chart]="chart2" class="col-md-6"></div>
-          <app-bar-graph style="min-height: 200px;" [data]="chart3" class="col-md-6"></app-bar-graph>
+          <app-bar-graph class="graph-height" [data]="chart3" class="col-md-6"></app-bar-graph>
         </div>
       </div>
 
