@@ -19,6 +19,17 @@ export class ApiService {
       }
     );
   }
+public getSummaryTableData(site_slug: any): Observable<any> {
+  return this.httpClient.get(
+    serviceBaseUrl + 'get-summary-table-report?site_name=' + site_slug,
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    }
+  );
+}
+
 
   test(data: any): Observable<any> {
     console.log(data);

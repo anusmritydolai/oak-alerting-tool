@@ -80,7 +80,7 @@ export class DeepDiveAnalyticsComponent implements OnInit, AfterViewInit {
       site_name: localStorage.getItem('site_slug'),
       start_date: this.start_date + ' 00:00:00',
       end_date: this.end_date + ' 23:59:59',
-      alert_no: 1,
+      alert_no: element[0],
     }).subscribe(data => {
       Object.keys(data).map((key, index) => { data[key] = JSON.parse(data[key]) });      
       console.log('apiService', data);
@@ -122,6 +122,7 @@ export class DeepDiveAnalyticsComponent implements OnInit, AfterViewInit {
           }
       },
       xAxis: {
+        type: 'datetime',
           accessibility: {
               rangeDescription: ''
           }

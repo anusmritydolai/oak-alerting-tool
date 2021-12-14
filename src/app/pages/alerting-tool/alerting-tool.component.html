@@ -6,45 +6,30 @@
       >Summary of all the alerts that has been generated in the system</span
     >
     <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-6" *ngIf="data">
       <table class="table table-bordered col-md-6">
         <thead>
           <tr>
             <th scope="col"></th>
-            <th scope="col">Main 1</th>
-            <th scope="col">Main 1 L1</th>
-            <th scope="col">Main 1 L2</th>
-            <th scope="col">Main 1 L3</th>
+            <th scope="col" *ngFor="let row of data | keyvalue">{{row.value.name || ''}}</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <th scope="row">Voltage Imbalance</th>
-            <td class="bcolor1">12</td>
-            <td>4</td>
-            <td>2</td>
-            <td>0</td>
+            <td class="bcolor1" *ngFor="let row of data | keyvalue">{{row.value.data[1] || 0}}</td>
           </tr>
           <tr>
             <th scope="row">Load Imbalance</th>
-            <td>0</td>
-            <td class="bcolor2">8</td>
-            <td class="bcolor1">11</td>
-            <td>0</td>
+            <td class="bcolor1" *ngFor="let row of data | keyvalue">{{row.value.data[0] || 0}}</td>
           </tr>
           <tr>
             <th scope="row">Low Power Factor</th>
-            <td>2</td>
-            <td>0</td>
-            <td class="bcolor2">8</td>
-            <td class="bcolor1">12</td>
+            <td *ngFor="let row of data | keyvalue">{{row.value.data[2] || 0}}</td>
           </tr>
           <tr>
-            <th scope="row">Abnormal Change In Energy Cons</th>
-            <td>0</td>
-            <td>2</td>
-            <td>2</td>
-            <td>2</td>
+            <th scope="row">Abnormal Change In Energy Consumption</th>
+            <td *ngFor="let row of data | keyvalue">{{row.value.data[3] || 0}}</td>
           </tr>
         </tbody>
       </table>
@@ -56,9 +41,19 @@
           <span class="card-heading1">
             Parameter:
           </span>
-          <select class="form-select monthPicker" [(ngModel)]="selectedType" placeholder="Voltage Imbalance">
+          <select class="form-select monthPicker" [(ngModel)]="selectedType" (change)="change()" placeholder="Voltage Imbalance">
             <option *ngFor="let type of typeList" [ngValue]="type">
               {{ type?.name }}
+            </option>
+          </select>
+        </div>
+        <div class="gap" *ngIf="thresholds">
+          <span class="card-heading1">
+            Threshold:
+          </span>
+          <select class="form-select monthPicker" [(ngModel)]="selectedThreshold" placeholder="Voltage Imbalance">
+            <option *ngFor="let type of thresholds" [ngValue]="type">
+              {{ type }}
             </option>
           </select>
         </div>
