@@ -15,10 +15,10 @@ export class AlertingToolComponent implements OnInit {
   chart: any;
   faCalendar = faCalendarAlt;
   typeList: any[] = [
-    { name: 'Voltage Imbalance', value: 2, values: [0.5,1,2,5] },
-    { name: 'Load Imbalance', value: 15, values: [10,15,20] },
-    { name: 'Low Power Factor', value: 0.95, values: [0.95,0.9,0.85,0.8] },
-    { name: 'Abnormal Change In Energy Consumption', value: 0, values: [] },
+    { name: 'Voltage Imbalance', defaultValue: 2, values: [0.5,1,2,5] },
+    { name: 'Load Imbalance', defaultValue: 15, values: [10,15,20] },
+    { name: 'Low Power Factor', defaultValue: 0.95, values: [0.95,0.9,0.85,0.8] },
+    { name: 'Abnormal Change In Energy Consumption', defaultValue: 0, values: [] },
   ];
   selectedType?: any = this.typeList[0];
   selectedTypes?: string;
@@ -41,7 +41,7 @@ export class AlertingToolComponent implements OnInit {
   }
   change(): void {      
     this.thresholds = this.selectedType.values
-    this.selectedThreshold = this.selectedType.value
+    this.selectedThreshold = this.selectedType.defaultValue
   }
 
   ngOnInit(): void {
