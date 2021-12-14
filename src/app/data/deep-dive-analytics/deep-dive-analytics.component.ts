@@ -166,7 +166,8 @@ export class DeepDiveAnalyticsComponent implements OnInit, AfterViewInit {
       responsive: {
           rules: [{
               condition: {
-                  maxWidth: 500
+                  maxWidth: 500,
+                  minHeight: 300
               },
               chartOptions: {
                   legend: {

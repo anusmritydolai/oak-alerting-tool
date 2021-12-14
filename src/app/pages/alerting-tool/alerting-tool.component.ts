@@ -68,7 +68,7 @@ export class AlertingToolComponent implements OnInit {
     const data = {
       selectedType: this.selectedType.name,
       selectedTypes: this.selectedTypes,
-      threshold: this.thresholds ? this.thresholds : 0.95,
+      threshold: this.selectedThreshold ? this.selectedThreshold : 0.95,
       dateRange: this.selectedDate,
     };
     const url =

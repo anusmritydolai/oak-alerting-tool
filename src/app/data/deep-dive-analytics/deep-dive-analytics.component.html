@@ -84,18 +84,13 @@
       </div>
     </div>
     <div class="card card-custom" [style.display]="displayedColumns2.length > 0 ? 'block' : 'none'">
-      <div class="card-heading">Anayltical Plots for {{ phase }} (kWh)</div>
-      <!-- <div class="row">
-        <div class="col-md-6"></div>
-        <div class="col-md-6"></div>
-      </div> -->
-
+      <div class="card-heading">Anayltical Plots for {{ phase }} (kWh)</div> 
       <div>
-        <div class="row" class="graph-height">
+        <div class="row graph-height">
           <div [chart]="chart" class="col-md-6"></div>
-          <app-area-graph class="graph-height" [data]="chart3" class="col-md-6"></app-area-graph>
+          <app-area-graph [data]="chart3" class="col-md-6 graph-height"></app-area-graph>
         </div>
-        <div class="row" class="graph-height">
+        <div class="row graph-height">
           <div [chart]="chart2" class="col-md-6"></div>
           <app-bar-graph class="graph-height" [data]="chart4" class="col-md-6"></app-bar-graph>
         </div>
