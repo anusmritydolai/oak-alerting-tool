@@ -8,94 +8,84 @@ import { Chart } from 'angular-highcharts';
 })
 export class AreaGraphComponent implements OnChanges {
   @Input('data') data: any = {};
-
   chart: any;
 
   constructor() { }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.data)
+    if (changes.data) {
+      this.chart = undefined
+      if (this.data)
       this.chart = new Chart({
         title: {
-          text: '',
-        },
-        chart: {
-          marginTop: 40,
-          events: {
-            load: function () {
-              var chart = this;
-              chart.renderer
-                .text(
-                  'Click on legends to modify chart',
-                  this.chartWidth / 2.45,
-                  this.chartHeight - 2
-                )
-                .attr({
-                  zIndex: 3,
-                  fill: 'black',
-                })
-                .add();
-            },
-          },
-        },
-        exporting: { enabled: false },
-        xAxis: {
-          categories: this.data.x_axis,
-        },
-        yAxis: {
-          min: 0,
+          text: ''
+      },
+      subtitle: {
+          text: ''
+      },
+      yAxis: {
           title: {
-            text: 'Consumption (kWh)',
-          },
-          stackLabels: {
-            enabled: false,
-            style: {
-              fontWeight: 'bold',
-              color: 'gray',
-            },
-          },
-        },
-
-        tooltip: {
-          headerFormat: '<b>{point.x}</b><br/>',
-          pointFormat:
-            '{series.name}: {point.y} kWh<br/>Total: {point.stackTotal} kWh',
-        },
-        plotOptions: {
-          column: {
-            stacking: 'normal',
-            dataLabels: {
-              enabled: false,
-            },
-          },
-        },
-        series: [
-          {
-            name: 'Operating',
-            type: 'area',
-            color: '#4164ADCC',
-            data: this.data.values_open,
-          },
-          {
-            name: 'Preparatory',
-            type: 'area',
-            color: '#7DC3BE',
-            data: this.data.values_preparatory,
-          },
-          {
-            name: 'Non-Operating',
-            type: 'area',
-            color: '#cccccc',
-            data: this.data.values_non_operating,
-          },
-          {
-            name: 'Closed',
-            type: 'area',
-            color: '#F8A992',
-            data: this.data.values_closed,
-          },
-        ],
+              text: 'Energy (kWh)'
+          }
+      },
+      xAxis: {
+          accessibility: {
+              rangeDescription: ''
+          }
+      },
+      legend: {
+        enabled: true,
+        align: 'center',
+        symbolPadding: 10,
+        symbolWidth: 70,
+        itemDistance: 50,
+        itemStyle:{
+          fontSize:'14px',
+          fontWeight:'bold',
+          textOverflow:'ellipsis',
+          padding:'30px'
+          }
+      },
+      plotOptions: {
+          series: {
+              label: {
+                  connectorAllowed: false
+              },
+              pointStart: 2010
+          }
+      },
+      series: [
+        {
+          name: this.data.columns,
+          type: 'area',
+          data: this.data.data
+      }, 
+      {
+          name: this.data.columns,
+          type: 'area',
+          data: this.data.da
+      }, {
+        name: this.data.columns,
+        type: 'area',
+        data: this.data.da
+    }],
+  
+      responsive: {
+          rules: [{
+              condition: {
+                  maxWidth: 500
+              },
+              chartOptions: {
+                  legend: {
+                      layout: 'horizontal',
+                      align: 'center',
+                      verticalAlign: 'bottom'
+                  }
+              }
+          }]
+      }
       });
+    }
   }
 
 }

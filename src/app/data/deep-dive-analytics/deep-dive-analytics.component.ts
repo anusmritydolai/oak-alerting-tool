@@ -15,7 +15,7 @@ import { MatSort } from '@angular/material/sort';
 export class DeepDiveAnalyticsComponent implements OnInit, AfterViewInit {
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
   dataSource2: MatTableDataSource<any> = new MatTableDataSource();
-  @ViewChild(MatPaginator) paginator: any;
+  @ViewChild('paginator1') paginator: any;
   @ViewChild('paginator2') paginator2: any;
   @ViewChild(MatSort) sort: any;
   chart: any;
@@ -28,8 +28,8 @@ export class DeepDiveAnalyticsComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = [];
   displayedColumns2: string[] = [];
   chart2: any;
-  chart3 = {"seq":["Operating","Non Operating","Preparatory","Closed"],"x_axis":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"y_axis":null,"values_open":[315.35,269.63,234.42,254.55,257.25,503.9,278.98],"values_preparatory":[177.84,196.43,145.63,159.24,147.82,113.87,81.32],"values_non_operating":[236.43,173.52,137.67,151.76,149.76,105.61,162.83],"values_closed":[0,0,0,0,0,0,0],"open_total":2114,"preparatory_total":1022,"non_operating_total":1118,"closed_total":0}
-  chart4 = {"seq":["Operating","Non Operating","Preparatory","Closed"],"x_axis":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"y_axis":null,"values_open":[315.35,269.63,234.42,254.55,257.25,503.9,278.98],"values_preparatory":[177.84,196.43,145.63,159.24,147.82,113.87,81.32],"values_non_operating":[236.43,173.52,137.67,151.76,149.76,105.61,162.83],"values_closed":[0,0,0,0,0,0,0],"open_total":2114,"preparatory_total":1022,"non_operating_total":1118,"closed_total":0}
+  chart3: any;
+  chart4: any;
   threshold: number = 0.95;
 
   constructor(private route: ActivatedRoute, private apiService: ApiService) {
@@ -60,12 +60,11 @@ export class DeepDiveAnalyticsComponent implements OnInit, AfterViewInit {
 
     this.apiService.test(data).subscribe(data => {      
       Object.keys(data).map((key, index) => { data[key] = JSON.parse(data[key]) });
-      console.log(data);
       
       this.displayedColumns = ['index'].concat(data.alert_table.columns).concat('Deep Analysis');      
       const dataSource = data.alert_table.data.map((dat: any[], i: number) => [data.alert_table.index[i]].concat(dat))      
       this.dataSource = new MatTableDataSource(dataSource);
-      this.dataSource.paginator = this.paginator;
+      setTimeout(() => this.dataSource.paginator = this.paginator);
       if (this.dataSource.paginator) {
         this.dataSource.paginator.firstPage();
       }
@@ -77,15 +76,30 @@ export class DeepDiveAnalyticsComponent implements OnInit, AfterViewInit {
     this.apiService.test2({
       alert_analyse: this.type,
       phase: this.phase,
-      threshold: 0.95,
+      threshold: this.threshold,
       site_name: localStorage.getItem('site_slug'),
       start_date: this.start_date + ' 00:00:00',
       end_date: this.end_date + ' 23:59:59',
       alert_no: 1,
     }).subscribe(data => {
       Object.keys(data).map((key, index) => { data[key] = JSON.parse(data[key]) });      
-      console.log(data)
-      data.Mix_Max_Table.columns = data.Mix_Max_Table.columns.map((column: any[]) => column[0]+' '+column[1])      
+      console.log('apiService', data);
+      data.histogram_1.columns = data.histogram_1.columns;
+      data.histogram_1.index = data.histogram_1.index[0];
+      data.histogram_1.data = data.histogram_1.data;
+      data.histogram_2.columns = data.histogram_2.columns[0];
+      data.histogram_2.index = data.histogram_2.index[0];
+      data.histogram_2.data = data.histogram_2.data;
+      data.Mix_Max_Table.columns = data.Mix_Max_Table.columns.map((column: any[]) => column[0]+' '+column[1])
+      
+      console.log(data.histogram_1);
+      this.chart3 = data.histogram_1;
+      this.chart4 = data.histogram_2;
+
+
+
+
+
       this.displayedColumns2 = ['index'].concat(data.Mix_Max_Table.columns);      
       const dataSource = data.Mix_Max_Table.data.map((dat: any[], i: number) => [data.Mix_Max_Table.index[i]].concat(dat))            
       this.dataSource2 = new MatTableDataSource(dataSource);
