@@ -7,7 +7,7 @@
   .card-custom {
     border-radius: 1rem !important;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    padding: 1.5rem;
+    padding: 2rem;
     margin: 1.5rem;
   }
   .card {
@@ -25,10 +25,30 @@
     font: var(--fontBold);
     font-size: 1.5vw;
     font-weight: 800;
+    margin-bottom: 1.5vw;
+  }
+  .date-heading{
+    color:var(--color3);
+    font-weight: 800;
   }
 
   table {
     width: 100%;
+  }
+  tr.mat-row {
+    border: 1px solid var(--color10);
+  }
+  th.mat-header-cell{
+    padding-left: 24px;
+    border: 1px solid var(--color10);
+  }
+  td.mat-cell { 
+    font-family: var(--fontRegular);
+    padding: 10px 24px;
+    border: 1px solid var(--color11);
+  }
+  td.mat-cell:last-of-type{
+    padding: 10px 12px;
   }
   .widget-subtitle {
     font-size: 1vw;
@@ -37,4 +57,14 @@
   }
   .graph-height{
     min-height: 200px !important;
+    margin-bottom: 2vw;
+  }
+  .header-color{
+    background-color: var(--color12)
+  }
+  .header-font{
+    font-family: var(--fontRegular);
+    font-size: 1vw;
+    color: var(--color9);
+    font-weight: 800;
   }

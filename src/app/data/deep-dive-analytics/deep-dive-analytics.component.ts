@@ -85,10 +85,10 @@ export class DeepDiveAnalyticsComponent implements OnInit, AfterViewInit {
       Object.keys(data).map((key, index) => { data[key] = JSON.parse(data[key]) });      
       console.log('apiService', data);
       data.histogram_1.columns = data.histogram_1.columns;
-      data.histogram_1.index = data.histogram_1.index[0];
+      data.histogram_1.index = data.histogram_1.index;
       data.histogram_1.data = data.histogram_1.data;
-      data.histogram_2.columns = data.histogram_2.columns[0];
-      data.histogram_2.index = data.histogram_2.index[0];
+      data.histogram_2.columns = data.histogram_2.columns;
+      data.histogram_2.index = data.histogram_2.index;
       data.histogram_2.data = data.histogram_2.data;
       data.Mix_Max_Table.columns = data.Mix_Max_Table.columns.map((column: any[]) => column[0]+' '+column[1])
       
@@ -110,6 +110,12 @@ export class DeepDiveAnalyticsComponent implements OnInit, AfterViewInit {
       }
 
       this.chart = new Chart({
+        chart: {
+          height: (9 / 16 * 100) + '%' // 16:9 ratio
+      },
+      exporting: {
+        enabled: false
+      },
         title: {
           text: ''
       },
@@ -140,14 +146,6 @@ export class DeepDiveAnalyticsComponent implements OnInit, AfterViewInit {
           padding:'30px'
           }
       },
-      plotOptions: {
-          series: {
-              label: {
-                  connectorAllowed: false
-              },
-              pointStart: 2010
-          }
-      },
       series: [
         {
           name: data.graph2_table1.columns[1],
@@ -163,24 +161,15 @@ export class DeepDiveAnalyticsComponent implements OnInit, AfterViewInit {
         data: data.graph2_table3.data
     }],
   
-      responsive: {
-          rules: [{
-              condition: {
-                  maxWidth: 500,
-                  minHeight: 300
-              },
-              chartOptions: {
-                  legend: {
-                      layout: 'horizontal',
-                      align: 'center',
-                      verticalAlign: 'bottom'
-                  }
-              }
-          }]
-      }
       });
 
        this.chart2 = new Chart({
+        chart: {
+          height: (9 / 16 * 100) + '%' // 16:9 ratio
+      },
+      exporting: {
+        enabled: false
+      },
         title: {
           text: ''
       },
@@ -193,6 +182,7 @@ export class DeepDiveAnalyticsComponent implements OnInit, AfterViewInit {
           }
       },
       xAxis: {
+        type:'datetime',
           accessibility: {
               rangeDescription: ''
           }
@@ -208,14 +198,6 @@ export class DeepDiveAnalyticsComponent implements OnInit, AfterViewInit {
           fontWeight:'bold',
           textOverflow:'ellipsis',
           padding:'30px'
-          }
-      },
-      plotOptions: {
-          series: {
-              label: {
-                  connectorAllowed: false
-              },
-              pointStart: 2010
           }
       },
       series: [
@@ -234,20 +216,6 @@ export class DeepDiveAnalyticsComponent implements OnInit, AfterViewInit {
         data: data.graph2_table1.data
     }],
   
-      responsive: {
-          rules: [{
-              condition: {
-                  maxWidth: 500
-              },
-              chartOptions: {
-                  legend: {
-                      layout: 'horizontal',
-                      align: 'center',
-                      verticalAlign: 'bottom'
-                  }
-              }
-          }]
-      }
       });
 
     //   this.chart3 = new Chart({

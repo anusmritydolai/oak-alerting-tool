@@ -13,10 +13,17 @@ export class AreaGraphComponent implements OnChanges {
   constructor() { }
 
   ngOnChanges(changes: SimpleChanges): void {
+    console.log('alldata', this.data.data)
     if (changes.data) {
       this.chart = undefined
       if (this.data)
       this.chart = new Chart({
+        chart: {
+          height: (9 / 16 * 100) + '%' // 16:9 ratio
+      },
+      exporting: {
+        enabled: false
+      },
         title: {
           text: ''
       },
@@ -25,10 +32,11 @@ export class AreaGraphComponent implements OnChanges {
       },
       yAxis: {
           title: {
-              text: 'Energy (kWh)'
+              text: 'Count'
           }
       },
       xAxis: {
+        categories:this.data.index,
           accessibility: {
               rangeDescription: ''
           }
@@ -46,44 +54,14 @@ export class AreaGraphComponent implements OnChanges {
           padding:'30px'
           }
       },
-      plotOptions: {
-          series: {
-              label: {
-                  connectorAllowed: false
-              },
-              pointStart: 2010
-          }
-      },
       series: [
         {
           name: this.data.columns,
           type: 'area',
           data: this.data.data
       }, 
-      {
-          name: this.data.columns,
-          type: 'area',
-          data: this.data.da
-      }, {
-        name: this.data.columns,
-        type: 'area',
-        data: this.data.da
-    }],
+        ],
   
-      responsive: {
-          rules: [{
-              condition: {
-                  maxWidth: 500
-              },
-              chartOptions: {
-                  legend: {
-                      layout: 'horizontal',
-                      align: 'center',
-                      verticalAlign: 'bottom'
-                  }
-              }
-          }]
-      }
       });
     }
   }
