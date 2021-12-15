@@ -1,5 +1,6 @@
 <app-header></app-header>
-<div class="dash" *ngIf="displayedColumns.length > 0">
+<loader *ngIf="loadings"></loader>
+<div class="dash" *ngIf="displayedColumns.length > 0 && !loadings">
   <div class="">
     <div class="card-heading ml-4">
       Deep Analysis: <span class="date-heading">{{ start_date | date: "dd-MM-YY" }} to

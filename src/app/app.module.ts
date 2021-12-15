@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { ApiService } from './service/api.service';
+import { LoaderModule } from './loader/loader.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { ApiService } from './service/api.service';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    LoaderModule
   ],
   providers: [ ApiService ],
   bootstrap: [AppComponent]

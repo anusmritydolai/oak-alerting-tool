@@ -1,5 +1,6 @@
 <app-header></app-header>
-<div class="dash">
+<loader *ngIf="loadings"></loader>
+<div class="dash" *ngIf="!loadings">
   <div class="card card-custom">
     <div class="card-heading">Summary</div>
     <span class="widget-subtitle"

@@ -35,6 +35,8 @@ export class AlertingToolComponent implements OnInit {
   selectedThreshold: any;
   thresholds!: any[];
   data!: { [key: string]: any; };
+  loadings: boolean = true;
+
   constructor(private apiService: ApiService) {
     this.minDate.setMonth(this.minDate.getMonth() - 4);
     this.maxDate.setMonth(this.maxDate.getMonth());
@@ -45,6 +47,8 @@ export class AlertingToolComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.change();
+    this.loadings = true;
     this.apiService.getSummaryTableData(localStorage.getItem('site_slug')).subscribe((data)=> {
       // data = {"Sub-Mains 1.1": "{\"name\":\"Sub-Mains 1.1\",\"index\":[\"Load Imbalance\",\"Voltage Imbalance\"],\"data\":[5,1]}",
       //   "Mains 1": "{\"name\":\"Mains 1\",\"index\":[\"Load Imbalance\",\"Voltage Imbalance\"],\"data\":[5,1]}",
@@ -55,7 +59,8 @@ export class AlertingToolComponent implements OnInit {
       // }
       Object.keys(data).map((key, index) => { data[key] = JSON.parse(data[key]) });
       this.data = data;
-    });
+      this.loadings = false
+    }, () => this.loadings = false);
     this.updateMonth();
   }
   updateMonth() {
@@ -91,7 +96,7 @@ export class AlertingToolComponent implements OnInit {
 
   showGraph() {
     console.log(this.selectedType);
-
+    this.loadings = true;
     if (!this.selectedType || !this.selectedTypes || !this.selectedDate) return;
     // var y = this.selectedTypes.split(' ');
     // y[0] = y[0].split('-')[1];
@@ -124,6 +129,7 @@ export class AlertingToolComponent implements OnInit {
       });
       this.hourlyCostData = data;
       this.show = true;
-    });
+      this.loadings = false
+    }, () => this.loadings = false);
   }
 }

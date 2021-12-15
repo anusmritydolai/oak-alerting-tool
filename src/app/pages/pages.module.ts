@@ -7,6 +7,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BsDatepickerModule, DatepickerModule } from 'ngx-bootstrap/datepicker';
 import { SharedModule } from '../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoaderModule } from '../loader/loader.module';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FontAwesomeModule,
     BsDatepickerModule.forRoot(),
     DatepickerModule.forRoot(),
+    LoaderModule
   ]
 })
 export class PagesModule { }

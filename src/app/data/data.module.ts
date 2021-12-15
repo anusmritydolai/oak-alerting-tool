@@ -9,6 +9,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSortModule } from '@angular/material/sort';
+import { LoaderModule } from '../loader/loader.module';
 
 @NgModule({
   declarations: [DeepDiveAnalyticsComponent],
@@ -20,7 +21,8 @@ import { MatSortModule } from '@angular/material/sort';
     MatTableModule,
     MatPaginatorModule,
     MatButtonModule,
-    MatSortModule
+    MatSortModule,
+    LoaderModule
   ],
   providers: [{ provide: HIGHCHARTS_MODULES, useFactory: highchartsModules }],
 
